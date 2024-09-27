@@ -15,9 +15,11 @@ devtools::install_github("https://github.com/lennartnoordermeer/FieldPlot")
 library(FieldPlot)
 
 # Example data
-trees <- system.file("extdata",
-                    "exampleData.Rdata",
-                    package = "FieldPlot")
+trees <- readRDS(
+              system.file("extdata",
+              "exampleData.Rdata",
+              package = "FieldPlot")
+                )
 
 # predict missing tree heights
 trees <- predictMissingHeights(trees)
