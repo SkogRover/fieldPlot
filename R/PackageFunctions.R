@@ -1,4 +1,5 @@
 
+
 #' Calculate Basal Area (BA)
 #'
 #' Computes the basal area of trees given diameters at breast height (dbh).
