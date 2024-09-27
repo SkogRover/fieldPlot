@@ -45,4 +45,4 @@ calcPlotSummaries <- function(trees){
 ```
 # Funding details
 
-The optBuck package was developed as part of the project SmartForest, funded by the Research council of Norway (project no. 309671). 
+The FieldPlot package was developed as part of the project SmartForest, funded by the Research council of Norway (project no. 309671). 
