@@ -1,6 +1,4 @@
 # FieldPlot
-Field Plot Data Calculation in Forest Inventory
-
 Lennart Noordermeer 
 
 Faculty of Environmental Sciences and Natural Resource Management, Norwegian University of Life Sciences
