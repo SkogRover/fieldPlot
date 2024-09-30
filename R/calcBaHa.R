@@ -1,6 +1,6 @@
 #' Calculate basal area per ha
 #'
-#' Computes the total basal area of trees in each plot, scaled to per ha values.
+#' Computes the basal area in each plot, scaled to per ha values.
 #'
 #' @param trees Data frame with columns plotID and ba (basal area of each tree in m2).
 #' @param plotArea Numeric value representing the plot area in m2.
