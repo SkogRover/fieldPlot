@@ -22,7 +22,7 @@ trees <- predictMissingHeights(trees)
 # calculate basal area
 trees$ba <- dbh2ba(trees$dbh)
 
-# predict volume
+# predict tree volumes
 trees$vol=taperNOR::volume(dbh=trees$dbh,
                            h_top=trees$h,
                            sp=trees$species)
