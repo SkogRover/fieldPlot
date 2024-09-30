@@ -1,9 +1,4 @@
 # FieldPlot
-Lennart Noordermeer 
-
-Faculty of Environmental Sciences and Natural Resource Management, Norwegian University of Life Sciences
-
-# Summary
 
 FieldPlot provides functions for handling field data in forest inventories based on sample plots. Functionality includes calculating basal area and volume for trees, predicting missing heights using height-diameters fitted with diameters and heights of sample trees, calculating the number of stems per ha for plots, as well as Lorey's mean height, dominant height, volume per ha and basal area per ha.  
 
