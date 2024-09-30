@@ -28,16 +28,7 @@ trees$vol=taperNOR::volume(dbh=trees$dbh,
                            sp=trees$species)
 
 # calculate plot summaries
-calcPlotSummaries <- function(trees){
-  data_list <- list(
-    calcNHa(trees, plotArea = 400),
-    calcHlor(trees),
-    calcHdom(trees, plotArea = 400),
-    calcVolHa(trees, plotArea = 400),
-    calcBaHa(trees, plotArea = 400)
-  )
-  Reduce(function(x, y) merge(x, y, by = "plotID"), data_list)
-}
+calcPlotSummaries(trees)
 
 ```
 # Funding details
