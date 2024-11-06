@@ -1,4 +1,4 @@
-Package: FieldPlot
+Package: fieldPlot
 Type: Package
 Title: Field Plot Data Calculation in Forest Inventory
 Version: 0.1.0
