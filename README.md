@@ -13,7 +13,7 @@ library(fieldPlot)
 trees <- readRDS(
               system.file("extdata",
               "exampleData.Rdata",
-              package = "FieldPlot")
+              package = "fieldPlot")
                 )
 
 # predict missing tree heights
