@@ -10,11 +10,14 @@
 #' fitHD_Plot(trees)
 #' @export
 fitHD_Plot <- function(trees) {
-  require(nlme)
+  if (!requireNamespace("nlme", quietly = TRUE)) {
+    stop("The 'nlme' package is required for this function. Please install it using install.packages('nlme').")
+  }
+
   data1 <- trees[!is.na(trees$h * trees$dbh), ] # trees with measured height
   start <- c(1.5, 0.34) # start values
   fit <- NULL
-  nlme(h ~ 1.3 + (dbh / (a + b * dbh))^3,
+  nlme::nlme(h ~ 1.3 + (dbh / (a + b * dbh))^3,
        data = data1,
        start = start,
        fixed = list(as.formula("a~1"), as.formula("b~1")),
