@@ -13,7 +13,7 @@ fitHD_Plot <- function(trees) {
   if (!requireNamespace("nlme", quietly = TRUE)) {
     stop("The 'nlme' package is required for this function. Please install it using install.packages('nlme').")
   }
-
+  require(nlme)
   data1 <- trees[!is.na(trees$h * trees$dbh), ] # trees with measured height
   start <- c(1.5, 0.34) # start values
   fit <- NULL
@@ -24,3 +24,5 @@ fitHD_Plot <- function(trees) {
        random = list(plotID = list(a ~ 1)),
        control = nlmeControl(tol = 1e-6, maxIter = 100))
 }
+
+
