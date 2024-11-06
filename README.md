@@ -6,8 +6,8 @@ fieldPlot provides functions for handling field data in forest inventories based
 # Example use
 ```r
 # installation
-devtools::install_github("https://github.com/lennartnoordermeer/FieldPlot")
-library(FieldPlot)
+devtools::install_github("[https://github.com/lennartnoordermeer/FieldPlot](https://github.com/SkogRover/fieldPlot)")
+library(fieldPlot)
 
 # Example data
 trees <- readRDS(
@@ -33,4 +33,4 @@ calcPlotSummaries(trees)
 ```
 # Funding details
 
-The FieldPlot package was developed as part of the project SmartForest, funded by the Research council of Norway (project no. 309671). 
+The fieldPlot package was developed as part of the project SmartForest, funded by the Research council of Norway (project no. 309671). 
