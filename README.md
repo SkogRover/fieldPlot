@@ -6,7 +6,7 @@ fieldPlot provides functions for handling field data in forest inventories based
 # Example use
 ```r
 # installation
-devtools::install_github("[https://github.com/lennartnoordermeer/FieldPlot](https://github.com/SkogRover/fieldPlot)")
+devtools::install_github("https://github.com/SkogRover/fieldPlot")
 library(fieldPlot)
 
 # Example data
