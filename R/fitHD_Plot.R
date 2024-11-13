@@ -16,7 +16,6 @@ fitHD_Plot <- function(trees) {
   require(nlme)
   data1 <- trees[!is.na(trees$h * trees$dbh), ] # trees with measured height
   start <- c(1.5, 0.34) # start values
-  fit <- NULL
   nlme::nlme(h ~ 1.3 + (dbh / (a + b * dbh))^3,
        data = data1,
        start = start,
