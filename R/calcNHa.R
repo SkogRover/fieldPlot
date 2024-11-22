@@ -9,6 +9,10 @@
 #' calcNHa(trees$plotID, plotArea = 400)
 #' @export
 calcNHa <- function(plotID, plotArea = 250) {
+  if (!requireNamespace("dplyr", quietly = TRUE)) {
+    stop("The 'dplyr' package is required for this function. Please install it using install.packages('dplyr').")
+  }
+  require(dplyr)
   data.frame(plotID = plotID) %>%
     group_by(plotID) %>%
     summarise(NHa = round(n() / plotArea * 10000))

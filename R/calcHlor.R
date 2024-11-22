@@ -10,6 +10,10 @@
 #' calcHlor(trees$h_complete, trees$ba, trees$plotID)
 #' @export
 calcHlor <- function(h, ba, plotID) {
+  if (!requireNamespace("dplyr", quietly = TRUE)) {
+    stop("The 'dplyr' package is required for this function. Please install it using install.packages('dplyr').")
+  }
+  require(dplyr)
   data.frame(plotID = plotID, h = h, ba = ba) %>%
     group_by(plotID) %>%
     summarise(Hlor = weighted.mean(h, ba, na.rm = TRUE))

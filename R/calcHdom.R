@@ -9,6 +9,10 @@
 #' calcHdom(trees, plotArea = 1000)
 #' @export
 calcHdom <- function(d, h, is_measured, plotID, plotArea){
+  if (!requireNamespace("dplyr", quietly = TRUE)) {
+    stop("The 'dplyr' package is required for this function. Please install it using install.packages('dplyr').")
+  }
+  require(dplyr)
 
   trees <- data.frame(
     plotID = plotID,

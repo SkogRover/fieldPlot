@@ -10,6 +10,10 @@
 #' calcBaHa(trees$ba, trees$plotID, plotArea = 250)
 #' @export
 calcBaHa <- function(ba, plotID, plotArea) {
+  if (!requireNamespace("dplyr", quietly = TRUE)) {
+    stop("The 'dplyr' package is required for this function. Please install it using install.packages('dplyr').")
+  }
+  require(dplyr)
   data.frame(plotID = plotID, ba = ba) %>%
     group_by(plotID) %>%
     summarise(BaHa = sum(ba) / plotArea * 10000)

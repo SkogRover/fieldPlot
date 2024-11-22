@@ -10,6 +10,10 @@
 #' calcVolHa(trees$vol, trees$plotID, plotArea = 400)
 #' @export
 calcVolHa <- function(vol, plotID, plotArea = 250) {
+  if (!requireNamespace("dplyr", quietly = TRUE)) {
+    stop("The 'dplyr' package is required for this function. Please install it using install.packages('dplyr').")
+  }
+  require(dplyr)
   data.frame(plotID = plotID, vol = vol) %>%
     group_by(plotID) %>%
     summarise(VolHa = sum(vol) / plotArea * 10000)
