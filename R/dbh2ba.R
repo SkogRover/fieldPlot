@@ -7,6 +7,6 @@
 #' @examples
 #' calcBa(30)
 #' @export
-dbh2ba <- function(dbh){
-  ((dbh/100)^2) * (pi/4)
+dbh2ba <- function(d){
+  ((d/100)^2) * (pi/4)
 }
