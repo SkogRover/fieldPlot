@@ -1,9 +1,22 @@
-#' Predict missing heights
+#' This function predicts missing tree heights using species-specific height-diameter models and returns a complete height dataset.
+#' Additionally, it identifies the trees with measured heights used as sample trees for model fitting.
 #'
-#' Predicts missing tree heights based on species-specific height-diameter models.
+#' @param d Numeric vector representing the diameter at breast height (dbh) of trees.
+#' @param h Numeric vector representing the measured heights of trees (NA for missing heights).
+#' @param sp Integer vector representing species codes for each tree (e.g., 1, 2, 3, etc.).
+#' @param plotID Factor or character vector indicating plot IDs for each tree.
 #'
-#' @param trees Data frame with columns plotID, species, h (height), and dbh (diameter at breast height).
-#' @return Data frame with predicted heights filled in for missing values.
+#' @return A list with the following elements:
+#' \itemize{
+#'   \item \code{h_complete}: Numeric vector of tree heights, including measured heights and predicted values for missing heights.
+#'   \item \code{is_measured}: Logical vector indicating which trees had measured heights (TRUE for measured, FALSE for predicted).
+#' }
+#'
+#' @details
+#' The function fits species-specific height-diameter models to predict missing tree heights.
+#' Measured heights are retained, and missing values are replaced with model predictions.
+#' For any missing predictions due to unavailable species-specific models, a generalized model is used.
+#'
 #' @examples
 #' predictMissingHeights(trees)
 #' @export

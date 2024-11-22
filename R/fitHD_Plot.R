@@ -7,7 +7,7 @@
 #' #' @references
 #' Sharma, R. P.and Breidenbach, J. (2015). Modeling height-diameter relationships for Norway spruce, Scots pine, and downy birch using Norwegian national forest inventory data. Forest Science and Technology, 11(1), 44-53.
 #' @examples
-#' fitHD_Plot(trees)
+#' predictMissingHeights(trees$d, trees$h, trees$sp, trees$plotID)
 #' @export
 fitHD_Plot <- function(d, h, sp, plotID) {
   if (!requireNamespace("nlme", quietly = TRUE)) {
