@@ -1,30 +1,32 @@
 #' Calculate plot summaries
 #'
-#' This function computes summaries for each plot of number of trees per ha, Lorey's height (Hlor), dominant height, volume per hectare, and basal area per hectare.
+#' Computes plot-level summaries for tree density (N), Lorey's height (`Hlor`), dominant height (`Hdom`), volume per hectare, and basal area per hectare.
 #'
-#' @param trees Data frame containing plotID, height of each tree ("h" in m) basal area ("ba" in m2), and volume ("vol" in m3).
+#' @param d Numeric vector of diameters at breast height in cm.
+#' @param h Numeric vector of tree heights in m.
+#' @param ba Numeric vector of basal areas of trees in m2.
+#' @param vol Numeric vector of tree volumes in m3.
+#' @param plotID Factor or character vector identifying plots.
+#' @param plotArea Numeric value representing the plot area in m2.
 #'
-#' @seealso calcNHa, calcHlor, calcHdom, calcVolHa, calcBaHa
+#' @seealso calcNHa, calcHlor, calcVolHa, calcBaHa
 #'
 #' @return A data frame with plot-level summaries including the following columns:
 #' - `plotID`: Identifier for each plot.
-#' - `N`: Tree density per ha
+#' - `NHa`: Tree density per ha.
 #' - `Hlor`: Lorey's height.
-#' - `Hdom`: Dominant height.
-#' - `Vol`: Volume per ha
-#' - `Ba`: Basal area per ha
+#' - `VolHa`: Volume per ha.
+#' - `BaHa`: Basal area per ha.
 #'
 #' @examples
-#' result <- calcPlotSummaries(trees)
-#'
+#' calcPlotSummaries(trees$d, trees$h, trees$ba, trees$vol, trees$plotID, plotArea = 400)
 #' @export
-calcPlotSummaries <- function(trees){
+calcPlotSummaries <- function(d, h, ba, vol, plotID, plotArea) {
   data_list <- list(
-    calcNHa(trees, plotArea = 400),
-    calcHlor(trees),
-    calcHdom(trees, plotArea = 400),
-    calcVolHa(trees, plotArea = 400),
-    calcBaHa(trees, plotArea = 400)
+    calcNHa(plotID, plotArea),
+    calcHlor(h, ba, plotID),
+    calcVolHa(vol, plotID, plotArea),
+    calcBaHa(ba, plotID, plotArea)
   )
   Reduce(function(x, y) merge(x, y, by = "plotID"), data_list)
 }

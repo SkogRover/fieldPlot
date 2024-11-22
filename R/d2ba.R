@@ -1,12 +1,12 @@
-#' Calculate basal brea
+#' Calculate basal area
 #'
 #' Computes the basal area of trees given diameters at breast height (dbh).
 #'
-#' @param dbh Numeric vector of diameter at breast height in cm.
-#' @return Numeric vector of basal areas in square centimeters.
+#' @param d Numeric vector of diameters at breast height in cm.
+#' @return Numeric vector of basal areas in m2.
 #' @examples
-#' calcBa(30)
+#' d2ba(d = trees$d)
 #' @export
-dbh2ba <- function(d){
-  ((d/100)^2) * (pi/4)
+d2ba <- function(d) {
+  ((d / 100)^2) * (pi / 4)
 }

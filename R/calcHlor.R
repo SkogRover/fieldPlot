@@ -1,14 +1,16 @@
 #' Calculate Lorey's mean height
 #'
-#' Computes the mean height of the largest trees in each plot, weighted by basal area.
+#' Computes the mean height of trees in each plot, weighted by basal area.
 #'
-#' @param trees Data frame with columns plotID, h (height), and ba (basal area).
-#' @return Data frame with plotID and the mean height of the largest trees (Hlor).
+#' @param h Numeric vector of tree heights in m.
+#' @param ba Numeric vector of basal areas of trees in m2.
+#' @param plotID Factor or character vector identifying plots.
+#' @return Data frame with `plotID` and Lorey's mean height (`Hlor`).
 #' @examples
-#' CalcHlor(trees)
+#' calcHlor(trees$h_complete, trees$ba, trees$plotID)
 #' @export
-calcHlor <- function(trees){
-  trees %>%
+calcHlor <- function(h, ba, plotID) {
+  data.frame(plotID = plotID, h = h, ba = ba) %>%
     group_by(plotID) %>%
-    summarise(Hlor = weighted.mean(h, ba))
+    summarise(Hlor = weighted.mean(h, ba, na.rm = TRUE))
 }
