@@ -25,7 +25,7 @@ calcPlotSummaries <- function(d, h, ba, vol, plotID, is_measured, plotArea) {
   data_list <- list(
     calcNHa(plotID, plotArea),
     calcVolHa(vol, plotID, plotArea),
-    calcBaHa(ba, plotID, plotArea)
+    calcBaHa(ba, plotID, plotArea),
     calcHlor(h, ba, plotID),
     calcHdom(d, h, is_measured, plotID, plotArea)
   )
