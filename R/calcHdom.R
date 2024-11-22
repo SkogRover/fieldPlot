@@ -2,8 +2,8 @@
 #'
 #' Computes the mean height of the dominant trees in each plot.
 #'
-#' @param trees Data frame with columns plotID, dbh (diameter at breast height), and h (height).
-#' @param plotArea Numeric value representing the plot area in m??.
+#' @param trees Data frame with columns plotID, dbh (diameter at breast height, cm), and h (height, m).
+#' @param plotArea Numeric value representing the plot area in m2.
 #' @return Data frame with plotID and the mean dominant height (Hdom).
 #' @examples
 #' calcHdom(trees, plotArea = 1000)
