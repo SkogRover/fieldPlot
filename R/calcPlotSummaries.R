@@ -21,12 +21,13 @@
 #' @examples
 #' calcPlotSummaries(trees$d, trees$h, trees$ba, trees$vol, trees$plotID, plotArea = 400)
 #' @export
-calcPlotSummaries <- function(d, h, ba, vol, plotID, plotArea) {
+calcPlotSummaries <- function(d, h, ba, vol, plotID, is_measured, plotArea) {
   data_list <- list(
     calcNHa(plotID, plotArea),
-    calcHlor(h, ba, plotID),
     calcVolHa(vol, plotID, plotArea),
     calcBaHa(ba, plotID, plotArea)
+    calcHlor(h, ba, plotID),
+    calcHdom(d, h, is_measured, plotID, plotArea)
   )
   Reduce(function(x, y) merge(x, y, by = "plotID"), data_list)
 }
