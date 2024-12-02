@@ -17,10 +17,9 @@ calcHdom <- function(d, h, plotID, plotArea=250){
   require(dplyr)
 
   return(data.frame(
-    plotID = plotID,
-    d = d,
-    h = h
-  ) %>%
+                    plotID = plotID,
+                    d = d,
+                    h = h) %>%
            group_by(plotID) %>%
            arrange(desc(d)) %>%
            slice_head(n = 2) %>%
