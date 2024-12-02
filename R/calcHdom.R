@@ -1,39 +1,28 @@
 #' Calculate dominant height
 #'
-#' Computes the mean height of the dominant trees in each plot.
+#' Computes the mean height of the dominant trees on each plot.
 #'
-#' @param trees Data frame with columns plotID, dbh (diameter at breast height, cm), and h (height, m).
-#' @param plotArea Numeric value representing the plot area in m2.
-#' @return Data frame with plotID and the mean dominant height (Hdom).
+#' @param d Numeric vector of diameter at breast height, in cm of all trees.
+#' @param h Numeric vector of heights in m. Must be complete (no \code{NA} values).
+#' @param plotID Factor or numeric vector representing the plot identifiers.
+#' @param plotArea Numeric value representing the plot area in m2. Defaults to 250 m2. (Note: currently unused in the function).
+#' @return Data frame with plotID and dominant height (Hdom).
 #' @examples
-#' calcHdom(trees, plotArea = 1000)
+#' calcHdom(trees, plotArea = 400)
 #' @export
-calcHdom <- function(d, h, is_measured, plotID, plotArea){
+calcHdom <- function(d, h, plotID, plotArea=250){
   if (!requireNamespace("dplyr", quietly = TRUE)) {
     stop("The 'dplyr' package is required for this function. Please install it using install.packages('dplyr').")
   }
   require(dplyr)
 
-  trees <- data.frame(
+  return(data.frame(
     plotID = plotID,
     d = d,
-    h = h,
-    is_measured = is_measured
-  )
-
-  trees <- trees %>%
-    group_by(plotID) %>%
-    mutate(domTree = rank(-d, ties.method = "min") <= ceiling(plotArea / 100)) %>%
-    ungroup()
-
-  Hdom <- trees %>%
-    group_by(plotID) %>%
-    summarise(Hdom = case_when(
-      sum(domTree & is_measured) == 2 ~ mean(h[domTree & is_measured]),
-      sum(domTree & is_measured) == 1 ~ mean(h[domTree]) * sum(h[domTree & is_measured]) / sum(h[domTree]),
-      TRUE ~ mean(h[domTree])
-    )) %>%
-    ungroup()
-
-  return(Hdom)
+    h = h
+  ) %>%
+           group_by(plotID) %>%
+           arrange(desc(d)) %>%
+           slice_head(n = 2) %>%
+           summarise(Hdom = mean(h)))
 }

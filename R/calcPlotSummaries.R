@@ -27,7 +27,7 @@ calcPlotSummaries <- function(d, h, ba, vol, plotID, is_measured, plotArea) {
     calcVolHa(vol, plotID, plotArea),
     calcBaHa(ba, plotID, plotArea),
     calcHlor(h, ba, plotID),
-    calcHdom(d, h, is_measured, plotID, plotArea)
+    calcHdom(d, h, plotID, plotArea)
   )
   Reduce(function(x, y) merge(x, y, by = "plotID"), data_list)
 }
