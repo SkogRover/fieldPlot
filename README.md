@@ -17,18 +17,26 @@ trees <- readRDS(
                 )
 
 # predict missing tree heights
-trees <- predictMissingHeights(trees)
+trees$h_complete <- predictMissingHeights(trees$d,
+                               trees$h,
+                               trees$sp,
+                               trees$plotID)
 
 # calculate basal area
-trees$ba <- dbh2ba(trees$dbh)
+trees$ba <- d2ba(trees$d)
 
 # predict tree volumes
-trees$vol=taperNOR::volume(dbh=trees$dbh,
-                           h_top=trees$h,
-                           sp=trees$species)
+trees$vol=taperNOR::volume(dbh=trees$d,
+                           h_top=trees$h_complete,
+                           sp=trees$sp)
 
 # calculate plot summaries
-calcPlotSummaries(trees)
+calcPlotSummaries(d =trees$d,
+                  h = trees$h_complete,
+                  ba = trees$ba,
+                  vol =trees$vol,
+                  plotID = trees$plotID,
+                  plotArea = 400)
 
 ```
 # Funding details
