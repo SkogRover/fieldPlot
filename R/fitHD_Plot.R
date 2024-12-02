@@ -1,4 +1,4 @@
-#' Fit height-diameter model by plot
+#' Fit a height-diameter model with plot-Level random effects
 #'
 #' Fits a height-diameter model that accounts for the plot.
 #'
