@@ -1,6 +1,6 @@
 # fieldPlot
 
-fieldPlot provides functions for handling field data in forest inventories based on sample plots. Functionality includes calculating basal area for trees, predicting volume using Norwegian volume models, predicting missing heights using height-diameters fitted with diameters and heights of sample trees, calculating the number of stems per ha for plots, as well as Lorey's mean height, dominant height, volume per ha and basal area per ha.  
+fieldPlot provides functions for handling field data in forest inventories based on sample plots. Functionality includes calculating basal area for trees, predicting missing heights using height-diameter models, calculating the number of stems per ha for plots, as well as Lorey's mean height, dominant height, volume per ha and basal area per ha.  
 
 
 # Example use
@@ -17,18 +17,26 @@ trees <- readRDS(
                 )
 
 # predict missing tree heights
-trees <- predictMissingHeights(trees)
+trees$h_complete <- predictMissingHeights(trees$d,
+                               trees$h,
+                               trees$sp,
+                               trees$plotID)
 
 # calculate basal area
-trees$ba <- dbh2ba(trees$dbh)
+trees$ba <- d2ba(trees$d)
 
 # predict tree volumes
-trees$vol=taperNOR::volume(dbh=trees$dbh,
-                           h_top=trees$h,
-                           sp=trees$species)
+trees$vol=taperNOR::volume(dbh=trees$d,
+                           h_top=trees$h_complete,
+                           sp=trees$sp)
 
 # calculate plot summaries
-calcPlotSummaries(trees)
+calcPlotSummaries(d =trees$d,
+                  h = trees$h_complete,
+                  ba = trees$ba,
+                  vol =trees$vol,
+                  plotID = trees$plotID,
+                  plotArea = 400)
 
 ```
 # Funding details
