@@ -10,7 +10,7 @@
 #' @examples
 #' calcHdom(trees, plotArea = 400)
 #' @export
-calcHdom <- function(d, h, plotID, plotArea=250){
+calcHdom <- function(d, h, plotID){
   if (!requireNamespace("dplyr", quietly = TRUE)) {
     stop("The 'dplyr' package is required for this function. Please install it using install.packages('dplyr').")
   }
