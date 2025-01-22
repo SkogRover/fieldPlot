@@ -2,8 +2,11 @@
 #'
 #' Fits a height-diameter model that accounts for the plot.
 #'
-#' @param trees Data frame with columns plotID, h (height in m), and dbh (diameter at breast height in cm).
-#' @return A fitted mixed-effects nonlinear model.
+#' @param d Numeric vector representing the diameter at breast height (dbh) of trees (in cm).
+#' @param h Numeric vector representing the height of trees (in m).#' @return A fitted mixed-effects nonlinear model.
+#' @param sp Integer vector representing species codes for each tree (e.g., 1, 2, 3, etc.).
+#' @param plotID Factor or character vector indicating plot IDs for each tree.
+#' @param timeout Numeric value specifying the maximum time (in seconds) allowed for fitting a mixed effects model for height. If the maximum time is exceeded, a simplified model will be used.
 #' #' @references
 #' Sharma, R. P.and Breidenbach, J. (2015). Modeling height-diameter relationships for Norway spruce, Scots pine, and downy birch using Norwegian national forest inventory data. Forest Science and Technology, 11(1), 44-53.
 #' @examples
