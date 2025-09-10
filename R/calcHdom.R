@@ -2,26 +2,41 @@
 #'
 #' Computes the mean height of the dominant trees on each plot.
 #'
-#' @param d Numeric vector of diameter at breast height, in cm of all trees.
-#' @param h Numeric vector of heights in m. Must be complete (no \code{NA} values).
-#' @param plotID Factor or numeric vector representing the plot identifiers.
-#' @param plotArea Numeric value representing the plot area in m2. Defaults to 250 m2. (Note: currently unused in the function).
-#' @return Data frame with plotID and dominant height (Hdom).
+#' @param d Numeric vector of diameter at breast height (cm) for all trees.
+#' @param h Numeric vector of heights (m). Must be complete (no \code{NA}).
+#' @param plotID Factor or numeric vector with plot identifiers.
+#' @param plotArea Numeric scalar, plot area in m??. Default: 250.
+#'
+#' @return Data frame with \code{plotID} and dominant height (\code{Hdom}).
+#'
 #' @examples
-#' calcHdom(trees, plotArea = 400)
+#' # calcHdom(d = trees$d, h = trees$h_complete, plotID = trees$plotID, plotArea = 400)
+#'
 #' @export
-calcHdom <- function(d, h, plotID){
+calcHdom <- function(d, h, plotID, plotArea = 250) {
+  # deps
   if (!requireNamespace("dplyr", quietly = TRUE)) {
-    stop("The 'dplyr' package is required for this function. Please install it using install.packages('dplyr').")
+    stop("Please install 'dplyr'.")
   }
-  require(dplyr)
+  # input checks
+  if (!is.numeric(plotArea) || length(plotArea) != 1L || is.na(plotArea) || plotArea <= 0) {
+    stop("'plotArea' must be a positive numeric scalar (m^2).")
+  }
+  if (any(is.na(h))) stop("'h' must be complete (no NA).")
 
-  return(data.frame(
-                    plotID = plotID,
-                    d = d,
-                    h = h) %>%
-           group_by(plotID) %>%
-           arrange(desc(d)) %>%
-           slice_head(n = 2) %>%
-           summarise(Hdom = mean(h)))
+  # round to nearest 100 m??, ties down (e.g., 250 -> 200)
+  round100_ties_down <- function(x) {
+    r <- x %% 100
+    down <- x - r
+    if (r < 50) down else if (r > 50) down + 100 else down
+  }
+  n_dom <- as.integer(round100_ties_down(plotArea) / 100)
+  if (n_dom < 1L) n_dom <- 1L
+
+  # compute Hdom
+  dplyr::tibble(plotID = plotID, d = d, h = h) |>
+    dplyr::group_by(plotID) |>
+    dplyr::arrange(dplyr::desc(d), .by_group = TRUE) |>
+    dplyr::slice_head(n = n_dom) |>
+    dplyr::summarise(Hdom = mean(h), .groups = "drop")
 }
